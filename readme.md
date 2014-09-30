@@ -12,6 +12,15 @@ A special graph archive database which will record Place / Landmark, Companies, 
 - Product
 - Event
 - Group or Association
+- Timelines
+- Family Trees
+- Genealogy Reports Closest Relatives Trending Feed
+- Activity Feed
+- Photo / Document Albums RESTful Web Service
+- User Authentication History Articles
+- Advanced Search
+- Data Verifications
+- Open Content Contributors Subscription Payments
 
 ######Architecture
 * Front-end: HTML, CSS, Bootstrap, AngularJS and jQuery Backend: Node.js or Python
@@ -19,3 +28,5 @@ A special graph archive database which will record Place / Landmark, Companies, 
 * Graph Database: Neo4j
 * Web Server: NGINX
 * Host: Heroku with Ubuntu DNS and SSL: CloudFlare Payment Gateway: Dwolla
+
+#######View @ Atticbase.io
