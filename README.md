@@ -29,13 +29,14 @@ A special graph archive database which will record Place / Landmark, Companies, 
 * Web Server: NGINX
 * Host: Heroku with Ubuntu DNS and SSL: CloudFlare Payment Gateway: Dwolla
 
-#######View @ Atticbase.io
+######View @ Atticbase.io
 
 ###### Installation
-1. Download the repository
-2. Install npm modules: `npm install`
-3. Install bower dependencies `bower install`
-4. Start up the server: `node server.js`
-5. View in browser at http://localhost:8080
+1. Install Node: 'brew install node'
+2. Download the repository
+3. Install npm modules: `npm install`
+4. Install bower dependencies `bower install`
+5. Start up the server: `node server.js`
+6. View in browser at http://localhost:8080
 
 If you have any questions or requests, email us at [schultz.leo@gmail.com](mailto:schultz.leo@gmail.com) and we'll keep updating this to make it perfect.
