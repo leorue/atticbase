@@ -32,10 +32,10 @@ A special graph archive database which will record Place / Landmark, Companies, 
 ######View @ Atticbase.io
 
 ###### Installation
-1. Install Node: 'brew install node'
+1. Install Node: On OSX - `brew install node`
 2. Download the repository
-3. Install npm modules: `npm install`
-4. Install bower dependencies `bower install`
+3. In repo install npm modules: `npm install`
+4. In repo Install bower dependencies `bower install`
 5. Start up the server: `node server.js`
 6. View in browser at http://localhost:8080
 
