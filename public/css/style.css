@@ -1,1 +1,6 @@
-body { padding-top:30px; }
+body { padding-top:30px; background-color: #1d1d1d; color: #fff;}
+a, a:visited{color: #fff;text-decoration: none;}
+a:hover, a:active, {color: #c96928!important; text-decoration: none!important;}
+.origin{font-family: 'Origin', sans-serif; }
+.orange {color: #c96928;text-decoration: none;}
+.orange:hover {color: #fff;text-decoration: none;}
