@@ -17,7 +17,10 @@ $(document).ready(function(){
      $('nav ul li, .btn-open').fadeIn("slow");
      open = false;
      });
-     $('.wrap').on('click', function(){
+    $('.wrap').on('click', function(){
      return false;
-   });
+    });
+    $('.nav-link').on('click', function(){
+     return false;
+    });
  });
