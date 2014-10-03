@@ -17,7 +17,4 @@ $(document).ready(function(){
      $('nav ul li, .btn-open').fadeIn("slow");
      open = false;
      });
-     $('.wrap').on('click', function(){
-     return false;
-   });
  });
