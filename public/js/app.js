@@ -1,52 +1,76 @@
 	// the app module
-	var mainApp = angular.module('mainApp', ['ngRoute']);
+	var mainApp = angular.module('mainApp', ['ui.router','ngResource']);
 
 	// configured routes
-	mainApp.config(function($routeProvider) {
-		$routeProvider
+	mainApp.config(function($stateProvider,$httpProvider) {
+		$stateProvider
 
 		// home page
-		.when('/', {
+		.state('/', {
 			templateUrl: 'views/home.html',
 			controller: 'mainController'
 		})
 
-		.when('/login', {
+		.state('/login', {
 			templateUrl: 'views/login.html',
 			controller: 'loginController'
 		})
 
-		.when('/register', {
+		.state('/register', {
 			templateUrl: 'views/register.html',
 			controller: 'registerController'
 		})
 
-		.when('/logout', {
+		.state('/logout', {
 			templateUrl: 'views/logout.html',
 			controller: 'logoutController'	
 		})
 
-		.when('/add', {
-			templateUrl: 'views/add.html',
-			controller: 'addController'
-		})
+		.state('person',{
+	        url:'/person',
+	        templateUrl:'views/person.html',
+	        controller:'personListController'
+	    })
 
-		.when('/profile', {
+	    .state('viewPerson',{
+	       url:'/person/:id/view',
+	       templateUrl:'views/person-view.html',
+	       controller:'personViewController'
+	    })
+
+	    .state('newPerson',{
+	        url:'/person/new',
+	        templateUrl:'views/person-add.html',
+	        controller:'personCreateController'
+	    })
+
+	    .state('editPerson',{
+	        url:'/person/:id/edit',
+	        templateUrl:'views/person-edit.html',
+	        controller:'personEditController'
+	    })
+
+		.state('/profile', {
 			templateUrl: 'views/profile.html',
 			controller: 'profileController'
 		})
 
-		.when('/search', {
+		.state('/search', {
 			templateUrl: 'views/search.html',
 			controller: 'searchController'
 		})		
 
-		.when('/story', {
+		.state('/story', {
 			templateUrl: 'views/story.html',
 			controller: 'storyController'
 		});
 
-	});
+	})
+  
+  .run(function($state){
+    $state.go('person');
+    $state.go('home');
+  });
 
 	mainApp.controller('mainController', function($scope) {
 		$scope.title = 'Welcome Home!';
@@ -87,3 +111,57 @@
 		$scope.title = 'Find a good story!';
 		$scope.message = 'We tell good stories';
 	});
+
+  mainApp.controller('personListController',function($scope,$state,popupService,$window,Person){
+    $scope.person=Person.query();
+    $scope.deletePerson=function(person){
+        if(popupService.showPopup('Really delete this?')){
+            person.$delete(function(){
+                $window.location.href='';
+            });
+        }
+    }
+  });
+
+  mainApp.controller('personViewController',function($scope,$stateParams,Person){
+    $scope.person=Person.get({id:$stateParams.id});
+    $scope.searchFilter = function (person) {
+      var keyword = new RegExp($scope.dataFilter, 'i');
+      return !$scope.dataFilter || keyword.test(person.title) || keyword.test(person.director) || keyword.test(person.releaseYear) || keyword.test(person.genre);
+    };
+  });
+
+  mainApp.controller('personCreateController',function($scope,$state,$stateParams,Person){
+    $scope.person=new Person();
+    $scope.addPerson=function(){
+        $scope.person.$save(function(){
+            $state.go('person');
+        });
+    }
+  });
+
+  mainApp.controller('personEditController',function($scope,$state,$stateParams,Person){
+    $scope.updatePerson=function(){
+        $scope.person.$update(function(){
+            $state.go('person');
+        });
+    };
+    $scope.loadPerson=function(){
+        $scope.person=Person.get({id:$stateParams.id});
+    };
+    $scope.loadPerson();
+  });
+
+  mainApp.factory('Person',function($resource){
+    return $resource('http://localhost:8000/api/person/:id',{id:'@_id'},{
+        update: {
+            method: 'PUT'
+        }
+    });
+  });
+
+  mainApp.service('popupService',function($window){
+    this.showPopup=function(message){
+        return $window.confirm(message);
+    }
+  });
